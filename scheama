@@ -1,0 +1,10 @@
+telecom_logic/
+├── data/                 # Папка для БД и логов (создается сама)
+├── templates/
+│   └── admin.html        # Интерфейс админки
+├── .env                  # Пароли и настройки
+├── Dockerfile            # Инструкция для образа
+├── docker-compose.yml    # Запуск контейнера
+├── main.py               # Основной код (FastAPI)
+├── requirements.txt      # Зависимости
+└── README.md             # Инструкция
