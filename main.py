@@ -71,19 +71,10 @@ async def process_ticket(data: PHPRequest):
 
     # 1. СПИСКИ РАЗРЕШЕННЫХ SUBJECT_NAME И PRODUCT_NAME
     ALLOWED_SUBJECTS = [
-        "Расхождения в HLR / Billing",
-        "Некорректная работа услуги / сервиса",
-        "Некорректная работа услуги/сервиса",
-        "Некорректная работа услуги",
-        "Некорректные начисления / тарификация",
-        "Проблема с отключением/подключением пакета"
+        "here your SUBJECTS"
     ]
     ALLOWED_PRODUCTS = [
-        "Биллинговая поддержка",
-        "Казахтелеком / Internet услуги / Internet пакеты",
-        "Голосовые услуги",
-        "Internet  услуги / Internet пакеты",
-        "Казахтелеком / Голосовые услуги"
+        "here your PRODUCTS"
     ]
 
     # 2. ОПРЕДЕЛЕНИЕ TARGET_THEME ПО DESCR
