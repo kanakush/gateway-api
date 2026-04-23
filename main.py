@@ -69,6 +69,13 @@ async def process_ticket(data: PHPRequest):
     now = datetime.utcnow()
     descr_text = data.DESCR.lower().strip() if data.DESCR else ""
 
+    # --- ПРИНУДИТЕЛЬНАЯ ЭСКАЛАЦИЯ, ЕСЛИ РЕКОМНЕДАЦИИ БЫЛИ ВЫПОЛНЕНЫ ---
+    bypass_phrases = ["повтор", "рекоменд", "снова", "ашылғ", "көмек", "қайтад"]
+    if any(phrase in descr_text for phrase in bypass_phrases):
+        logger.info(f"MANUAL_BYPASS | ID: {data.ID} | MSISDN: {data.MSISDN} | User made 1st recommend")
+        db.close()
+        return {"action": "manual_processing", "target": "L2-SCU"}
+
     # 1. СПИСКИ РАЗРЕШЕННЫХ SUBJECT_NAME И PRODUCT_NAME
     ALLOWED_SUBJECTS = [
         "here your SUBJECTS"
