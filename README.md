@@ -5,17 +5,19 @@ backend support levels.
 ![Dashboard Screen](screenshots/Admin_Dashboard.png)
 
 Key Features
-Automated Triage: Identifies ticket intent (Internet vs. Voice issues) using keyword analysis.
-Intelligent Autoreply: Provides instant troubleshooting instructions for first-time callers.
-Silent Escalation: Automatically routes repeat issues (same MSISDN/Theme within 7 days) to Level 2 support.
-Admin Dashboard: Web-based interface for real-time log monitoring and ticket history.
-Data Export: Built-in functionality to export ticket records to Excel for reporting.
+Automated Triage: Identifies ticket intent (Internet vs. Voice issues) using intelligent keyword analysis.
+Intelligent Autoreply: Provides instant, categorized troubleshooting instructions for new, unique inquiries.
+Manual Bypass: Immediately forces manual_processing for L2-SCU if the description contains urgent triggers (e.g., "repeat request", "recommendations didn't help").
+Silent Escalation: Automatically routes recurring issues (same MSISDN/Theme within a 7-day window) to L2-SCU without redundant replies.
+Admin Dashboard: Web-based interface for real-time log monitoring and ticket history analysis.
+Data Export: Built-in functionality to export ticket records to Excel for detailed reporting.
 
-Technical StackFramework: 
-FastAPI (Python 3.10) ORM/Database: SQLAlchemy with SQLite 
-Data Processing:Pandas & OpenPyxl 
-Server:Uvicorn 
-Containerization: Docker 
+Technical Stack
+Framework: FastAPI (Python 3.10)
+ORM/Database: SQLAlchemy with SQLite
+Data Processing: Pandas & OpenPyxl
+Server: Uvicorn
+Containerization: Docker
 
 📂 Project Structure
 telecom_logic/
