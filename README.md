@@ -2,7 +2,7 @@
 The Interceptor API is a high-performance service designed for the automated processing, filtering, and intelligent 
 routing of technical support tickets. It acts as a gateway between frontend systems (e.g., PHP-based platforms) and 
 backend support levels.
-![Dashboard Screen](screenshots/Admin_Dashboard.png)
+![Dashboard Screen](templates/SmartG.png)
 
 Key Features
 Automated Triage: Identifies ticket intent (Internet vs. Voice issues) using intelligent keyword analysis.
@@ -11,6 +11,7 @@ Manual Bypass: Immediately forces manual_processing for L2-SCU if the descriptio
 Silent Escalation: Automatically routes recurring issues (same MSISDN/Theme within a 7-day window) to L2-SCU without redundant replies.
 Admin Dashboard: Web-based interface for real-time log monitoring and ticket history analysis.
 Data Export: Built-in functionality to export ticket records to Excel for detailed reporting.
+![Dashboard Screen](screenshots/Admin_Dashboard.png)
 
 Technical Stack
 Framework: FastAPI (Python 3.10)
