@@ -1,6 +1,7 @@
 import os
 import io
 import logging
+import time
 from logging.handlers import RotatingFileHandler
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -16,6 +17,21 @@ from sqlalchemy.orm import sessionmaker
 import pandas as pd
 
 load_dotenv()
+
+# --- НАСТРОЙКА ЧАСОВОГО ПОЯСА (GMT+5) ---
+TZ_KZ = timezone(timedelta(hours=5))
+
+def get_now_kz():
+    return datetime.now(TZ_KZ)
+
+class GMT5Formatter(logging.Formatter):
+    def converter(self, timestamp):
+        dt = datetime.fromtimestamp(timestamp, tz=timezone.utc) + timedelta(hours=5)
+        return dt.timetuple()
+
+    def formatTime(self, record, datefmt=None):
+        ct = self.converter(record.created)
+        return time.strftime(datefmt or "%Y-%m-%d %H:%M:%S", ct)
 
 # Инициализация хранилища
 if not os.path.exists('data'): os.makedirs('data')
@@ -42,7 +58,7 @@ class TicketState(Base):
     theme = Column(String, primary_key=True) # Составной ключ для уникальности комбинации
     subject = Column(String, primary_key=True)
     product = Column(String, primary_key=True)
-    updated_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime(timezone=True), default=get_now_kz)
 
 
 Base.metadata.create_all(bind=engine)
@@ -66,7 +82,7 @@ def authenticate(credentials: HTTPBasicCredentials = Depends(security)):
 @app.post("/process")
 async def process_ticket(data: PHPRequest):
     db = SessionLocal()
-    now = datetime.utcnow()
+    now = get_now_kz()
     descr_text = data.DESCR.lower().strip() if data.DESCR else ""
 
     # --- ПРИНУДИТЕЛЬНАЯ ЭСКАЛАЦИЯ, ЕСЛИ РЕКОМНЕДАЦИИ БЫЛИ ВЫПОЛНЕНЫ ---
